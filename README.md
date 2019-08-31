@@ -5,4 +5,4 @@ I used it in order to create tiles in Mapbox, but can be used with any map syste
 
 Open datas are to download from https://www.navitia.io/datasets inside 'table'
 
-The script should be placed in the folder containing the files downloaded.
+The files are already dowloaded but should be renew when Navita release datas update at least twice a year.
