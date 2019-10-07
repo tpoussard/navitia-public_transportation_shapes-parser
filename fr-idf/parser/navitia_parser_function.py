@@ -5,7 +5,7 @@ def getGeometryIdwithLineId():
     indexLines = 0
     with open('../ntfs/lines.txt', 'r') as file:
         for line in file:
-            if indexLines > 0:# skip first line header
+            if indexLines > 0:  # skip first line header
                 field = line.split(',')
                 lineId = field[0]
                 geometryId = field[12]
@@ -21,7 +21,7 @@ def getGeometryIdwithLineId():
     with open('../ntfs/routes.txt', 'r') as file:
         indexRoutes = 0
         for line in file:
-            if indexRoutes > 0:# skip first line header
+            if indexRoutes > 0:  # skip first line header
                 field = line.split(',')
                 lineId = field[3]
                 geometryId = field[4]

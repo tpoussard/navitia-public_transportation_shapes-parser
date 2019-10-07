@@ -1,12 +1,13 @@
 import json
-from tasks_parser_multiline_string_function import *
+from navitia_parser_function import *
 
-geometryNlineIds_colored = getGeometryIdwithLineId()
+geometry2lineIds_colored = getGeometryIdwithLineId()
 arrayOfGeojsonItems=[]
 index = 0
 formerIndex = 0
 properties = {}
 notFoundIndex = 0
+
 with open('../ntfs/geometries.txt', 'r') as file:
     for line in file:
         if index > 0:
@@ -14,13 +15,14 @@ with open('../ntfs/geometries.txt', 'r') as file:
             geometryId = field[0]
             print('geometryId', geometryId)
             properties = {'geometryId': geometryId}
+
     # search for routeId matching geometryId to fill properties
-            # properties = [obj for obj in geometryNlineIds_colored if obj['geometryId'] == geometryId]
-            for obj in geometryNlineIds_colored:
+            # properties = [obj for obj in geometry2lineIds_colored if obj['geometryId'] == geometryId]
+            for obj in geometry2lineIds_colored:
                 if obj['geometryId'] == geometryId:
                     properties.update({'lineId': obj['lineId'], 'lineColor': obj['lineColor'], 'lineTextColor': obj['lineTextColor']})
                     break
-            if not 'lineId' in properties:
+            if 'lineId' not in properties:
                 print('no corresponding geometryId found for geometryId:', geometryId, properties)
             if properties['lineId'] == '':
                 notFoundIndex += 1
