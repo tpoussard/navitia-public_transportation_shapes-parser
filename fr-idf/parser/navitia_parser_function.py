@@ -1,54 +1,57 @@
 import json
 
-def getGeometryIdwithLineId():
-    lineId2geometryId = []
-    indexLines = 0
+
+def get_lines_details():
+    line2geometry = []
+    index_lines = 0
     with open('../ntfs/lines.txt', 'r') as file:
         for line in file:
-            if indexLines > 0:  # skip first line header
+            if index_lines > 0:  # skip first line header
                 field = line.split(',')
-                lineId = field[0]
-                geometryId = field[12]
-                if geometryId != '':
-                    lineId2geometryId.append({
-                        'lineId': lineId,
-                        'geometryId': geometryId,
+                line_id = field[0]
+                geometry_id = field[12]
+                if geometry_id != '':
+                    line2geometry.append({
+                        'line_id': line_id,
+                        'geometry_id': geometry_id,
                         'lineColor': '#' + field[7],
                         'lineTextColor': '#' + field[8]
                     })
-            indexLines += 1
+            index_lines += 1
 
     with open('../ntfs/routes.txt', 'r') as file:
-        indexRoutes = 0
+        index_routes = 0
         for line in file:
-            if indexRoutes > 0:  # skip first line header
+            if index_routes > 0:  # skip first line header
                 field = line.split(',')
-                lineId = field[3]
-                geometryId = field[4]
-                if geometryId != '':
-                    lineId2geometryId.append({
-                        'lineId': lineId,
-                        'geometryId': geometryId,
+                line_id = field[3]
+                geometry_id = field[4]
+                if geometry_id != '':
+                    line2geometry.append({
+                        'line_id': line_id,
+                        'geometry_id': geometry_id,
                         'lineColor': '',
                         'lineTextColor': ''
                     })
-            indexRoutes += 1
-    return lineId2geometryId
+            index_routes += 1
+    return line2geometry
 
-def strLineString2Float(strLineString):
-    floatLineString = []
-    for strCoordinate in strLineString:
+
+def convert_linestring2float(linestring):
+    float_linestring = []
+    for strCoordinate in linestring:
         lat = float(strCoordinate[0])
         lng = float(strCoordinate[1])
-        floatLineString.append([lat, lng])
-    return floatLineString
+        float_linestring.append([lat, lng])
+    return float_linestring
 
-def write2file(arrayOfGeojsonItems, index, formerIndex):
-    geojsonCollection = {
+
+def write2file(geojson_items, index, former_index):
+    geojson_collection = {
         "type": "FeatureCollection",
-        "features": arrayOfGeojsonItems
+        "features": geojson_items
     }
-    name = '../geojson/data_' + str(formerIndex) + '-' + str(index) + '.json'
+    name = '../geojson/data_' + str(former_index) + '-' + str(index) + '.json'
     with open(name, 'w') as output_file:
-        json.dump(geojsonCollection, output_file)
+        json.dump(geojson_collection, output_file)
     print("\tData saved inside :", name)
