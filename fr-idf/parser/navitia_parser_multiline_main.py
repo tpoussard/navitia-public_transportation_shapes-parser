@@ -1,3 +1,4 @@
+# -*- coding: utf -*-
 import json
 from navitia_parser_function import *
 

@@ -1,7 +1,8 @@
+# -*- coding: utf -*-
 import json
 
 
-def get_lines_details():
+def get_lines_details():  # parsing lines.txt to get geometry id associated with line id
     line2geometry = []
     index_lines = 0
     with open('../ntfs/lines.txt', 'r') as file:
@@ -18,7 +19,7 @@ def get_lines_details():
                         'lineTextColor': '#' + field[8]
                     })
             index_lines += 1
-
+    # parsing routes.txt to add text color and line color
     with open('../ntfs/routes.txt', 'r') as file:
         index_routes = 0
         for line in file:
@@ -37,7 +38,7 @@ def get_lines_details():
     return line2geometry
 
 
-def convert_linestring2float(linestring):
+def convert_linestring2float(linestring):  # convert an array of string coordinates to float
     float_linestring = []
     for strCoordinate in linestring:
         lat = float(strCoordinate[0])
@@ -46,7 +47,7 @@ def convert_linestring2float(linestring):
     return float_linestring
 
 
-def write2file(geojson_items, index, former_index):
+def write2file(geojson_items, index, former_index):  # write data to a file and increment name
     geojson_collection = {
         "type": "FeatureCollection",
         "features": geojson_items
