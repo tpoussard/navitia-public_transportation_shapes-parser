@@ -16,8 +16,8 @@ with open('../ntfs/geometries.txt', 'r') as file:
         if index > 0:
             field = line.split(',', 1)
             geometry_id = field[0]
-            print('geometry_id', geometry_id, end='\r')
             properties = {'geometry_id': geometry_id}
+            print('geometry_id', geometry_id, end='\r')
 
     # search for routeId matching geometry_id to fill properties
             [properties.update({
